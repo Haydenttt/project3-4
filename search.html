@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script type="text/javascript">
+			function changetxt() {
+
+			}
+
+			function search() {
+//				gather keyword
+				var str = document.getElementById('text_keyword').value;
+//				name the expected searching page url
+				url = 'http://localhost:5000/search/' + str;
+				var xmlhttp = new XMLHttpRequest();
+				xmlhttp.open("GET",url,true);
+				xmlhttp.send();
+				
+				xmlhttp.onreadystatechange=function(){
+//					Response incoming-readyState
+					if(xmlhttp.readyState==4 && xmlhttp.status==200){
+						var str1 = xmlhttp.responseText;
+//						document.getElementById("text_keyword").value=str1;
+						document.getElementById("resultTXT").innerHTML=str1;
+//					else{
+//						document.getElementById("resultTXT").innerHTML="error";
+//					}
+					}
+				}
+
+			}
+		</script>
+	</head>
+
+	<body>
+		<div class="search">
+			<div class="search">
+				<input type="text" id="text_keyword" onkeydown="keydown()" />
+				<input type="button" class="btn" value="百度一下" onclick="search()" />
+			</div>
+			
+			<div id="resultTXT">
+				
+			</div>
+			<br/>
+			<a href="http://localhost:5000/csv/" style="color: black;text-decoration: none;background: lightgoldenrodyellow;">CSV download</a>
+			<a href="http://localhost:5000/excel/" style="color: black;text-decoration: none;background: lightgoldenrodyellow;">EXCEL download</a>
+		</div>
+	</body>
+
+</html>
